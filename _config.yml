@@ -1,0 +1,30 @@
+# Site settings
+title: Kiowa Wieser-Matthews
+description: Software Engineer specializing in high-performance data systems, GPU workloads, and scalable compute pipelines
+baseurl: ""
+url: ""
+
+# Author
+author:
+  name: Kiowa Wieser-Matthews
+  email: 13wieski@gmail.com
+  linkedin: kiowa-wieser-matthews
+  github: OriginalName457
+
+# Build settings
+markdown: kramdown
+theme: null
+plugins:
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - nul
+  - "Kiowa Resume.pdf"
+  - "Nvidia Resume.pdf"
+  - "HOW-TO-POST.md"
+  - "Protein Heaven.mp4"
+  - "DNASite.mp4"

@@ -1,0 +1,28 @@
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+.bundle/
+Gemfile.lock
+
+# PDFs in root (but allow assets/Kiowa_Resume.pdf)
+/Kiowa Resume.pdf
+/Nvidia Resume.pdf
+
+# Source video files (processed versions are in assets/videos/)
+/DNASite.mp4
+/Protein Heaven.mp4
+/*.mp4.crswap
+
+# Screenshots and temp files
+/*.png
+/SETUP_NOTES.txt
+
+# System files
+.DS_Store
+Thumbs.db
+nul
+
+# Guide file (for personal reference only)
+HOW-TO-POST.md

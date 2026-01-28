@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  {% seo %}
+</head>
+<body>
+  {{ content }}
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Generate DNA Double Helix
+    function createDNAHelix(containerId) {
+      const helix = document.getElementById(containerId);
+      if (!helix) return;
+
+      // Get the actual height of the container
+      const container = helix.parentElement;
+      const containerHeight = container.offsetHeight || window.innerHeight;
+
+      // Calculate number of nucleotides based on height (one every ~25px)
+      const spacing = 25;
+      const nucleotideCount = Math.floor(containerHeight / spacing);
+
+      for (let i = 0; i < nucleotideCount; i++) {
+        const nucleotide = document.createElement('div');
+        nucleotide.className = 'nucleotide';
+
+        // Position vertically
+        const yPos = i * spacing;
+
+        // Calculate rotation for helix twist (360 degrees over ~10 nucleotides = 36 per step)
+        const rotation = i * 36;
+
+        // Calculate 3D position using sine/cosine for smooth helix
+        const zTranslate = Math.sin((rotation) * Math.PI / 180) * 30;
+        const xOffset = Math.cos((rotation) * Math.PI / 180) * 10;
+
+        nucleotide.style.top = `${yPos}px`;
+        nucleotide.style.transform = `rotateY(${rotation}deg) translateZ(${zTranslate}px)`;
+
+        // Create left nucleotide (teal/green)
+        const leftNuc = document.createElement('div');
+        leftNuc.className = 'nucleotide-left';
+        leftNuc.style.transform = `translateX(${xOffset}px)`;
+
+        // Create right nucleotide (purple)
+        const rightNuc = document.createElement('div');
+        rightNuc.className = 'nucleotide-right';
+        rightNuc.style.transform = `translateX(${-xOffset}px)`;
+
+        // Create bond connecting them
+        const bond = document.createElement('div');
+        bond.className = 'bond';
+
+        nucleotide.appendChild(leftNuc);
+        nucleotide.appendChild(bond);
+        nucleotide.appendChild(rightNuc);
+        helix.appendChild(nucleotide);
+      }
+    }
+
+    // Initialize DNA helixes when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        createDNAHelix('dna-left');
+        createDNAHelix('dna-right');
+      });
+    } else {
+      createDNAHelix('dna-left');
+      createDNAHelix('dna-right');
+    }
+
+    // DNA Letter Scramble Effect
+    const dnaLetters = ['G', 'A', 'T', 'C'];
+
+    function getRandomDNA() {
+      return dnaLetters[Math.floor(Math.random() * dnaLetters.length)];
+    }
+
+    function scrambleText(element) {
+      const originalText = element.getAttribute('data-text') || element.textContent;
+      element.setAttribute('data-text', originalText);
+
+      let iteration = 0;
+      const maxIterations = originalText.length;
+
+      // Start fully scrambled
+      element.textContent = originalText.split('').map(char =>
+        char === ' ' ? ' ' : getRandomDNA()
+      ).join('');
+
+      const interval = setInterval(() => {
+        element.textContent = originalText.split('').map((char, index) => {
+          // Keep spaces as spaces
+          if (char === ' ') return ' ';
+          // Characters before iteration index show real letter
+          if (index < iteration) return originalText[index];
+          // Characters at/after iteration show scrambled DNA
+          return getRandomDNA();
+        }).join('');
+
+        iteration += 1/6; // Slow reveal so people can see the decoding
+
+        if (iteration >= maxIterations) {
+          element.textContent = originalText;
+          clearInterval(interval);
+        }
+      }, 50);
+    }
+
+    // Observer for triggering scramble on scroll into view
+    const scrambleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('scrambled')) {
+          entry.target.classList.add('scrambled');
+          scrambleText(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    // Initialize scramble effect on all marked elements
+    function initScrambleEffect() {
+      document.querySelectorAll('.dna-scramble').forEach(el => {
+        // Store original text and start with DNA letters
+        const originalText = el.textContent;
+        el.setAttribute('data-text', originalText);
+        el.textContent = originalText.split('').map(char =>
+          char === ' ' ? ' ' : getRandomDNA()
+        ).join('');
+        scrambleObserver.observe(el);
+      });
+    }
+
+    // Run on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrambleEffect);
+    } else {
+      initScrambleEffect();
+    }
+  </script>
+</body>
+</html>
