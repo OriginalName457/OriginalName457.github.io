@@ -234,6 +234,18 @@
           copyEmail();
         }
       });
+
+      // Redirect contact section email link to the hero button
+      const contactEmailLink = document.getElementById('contact-email-link');
+      if (contactEmailLink) {
+        contactEmailLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            emailBtn.click();
+          }, 500);
+        });
+      }
     }
   </script>
 </body>
