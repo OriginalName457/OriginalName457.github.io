@@ -179,35 +179,41 @@
     // Email Button Interactive Feature
     const emailBtn = document.getElementById('email-btn');
     const emailBtnText = document.getElementById('email-btn-text');
-    const emailHint = document.getElementById('email-hint');
 
     if (emailBtn) {
       let emailState = 'initial'; // initial, revealed, copied
       const email = '13wieski@gmail.com';
 
+      // Create hint element below the buttons
+      const heroCta = document.querySelector('.hero-cta');
+      const emailHint = document.createElement('span');
+      emailHint.className = 'email-hint';
+      if (heroCta) {
+        heroCta.parentNode.insertBefore(emailHint, heroCta.nextSibling);
+      }
+
       function scrambleToEmail() {
-        const originalText = emailBtnText.textContent;
         const targetText = email;
         let iteration = 0;
-        const maxIterations = Math.max(originalText.length, targetText.length);
+        const maxIterations = targetText.length;
 
         const interval = setInterval(() => {
           emailBtnText.textContent = targetText.split('').map((char, index) => {
+            if (char === '@' || char === '.') return char;
             if (index < iteration) return targetText[index];
             return 'GATC'[Math.floor(Math.random() * 4)];
           }).join('');
 
-          iteration += 1/4;
+          iteration += 1/6;
 
           if (iteration >= maxIterations) {
             emailBtnText.textContent = targetText;
             clearInterval(interval);
-            emailBtn.classList.add('revealed');
             emailHint.textContent = 'click again to copy';
             emailHint.classList.add('visible');
             emailState = 'revealed';
           }
-        }, 40);
+        }, 50);
       }
 
       function copyEmail() {

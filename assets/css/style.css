@@ -334,17 +334,21 @@ body {
 }
 
 /* Email Button Interactive */
-.email-btn-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+#email-btn {
+  min-width: 180px;
+}
+
+#email-btn.copied {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+  box-shadow: 0 4px 20px var(--color-accent-glow);
 }
 
 .email-hint {
-  font-size: 0.75rem;
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
   color: var(--color-success);
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease;
   font-family: var(--font-mono);
@@ -352,16 +356,6 @@ body {
 
 .email-hint.visible {
   opacity: 1;
-}
-
-#email-btn.revealed {
-  font-family: var(--font-mono);
-  letter-spacing: 0.5px;
-}
-
-#email-btn.copied {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
-  box-shadow: 0 4px 20px var(--color-accent-glow);
 }
 
 /* ============================================
