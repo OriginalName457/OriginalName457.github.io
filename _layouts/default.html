@@ -184,13 +184,10 @@
       let emailState = 'initial'; // initial, revealed, copied
       const email = '13wieski@gmail.com';
 
-      // Create hint element below the buttons
-      const heroCta = document.querySelector('.hero-cta');
+      // Create hint element directly under the email button
       const emailHint = document.createElement('span');
       emailHint.className = 'email-hint';
-      if (heroCta) {
-        heroCta.parentNode.insertBefore(emailHint, heroCta.nextSibling);
-      }
+      emailBtn.appendChild(emailHint);
 
       function scrambleToEmail() {
         const targetText = email;
