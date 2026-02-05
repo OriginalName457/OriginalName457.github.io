@@ -14,6 +14,9 @@
   <!-- Styles -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+
   {% seo %}
 </head>
 <body>
@@ -201,7 +204,7 @@
             return 'GATC'[Math.floor(Math.random() * 4)];
           }).join('');
 
-          iteration += 1/6;
+          iteration += 1/3;
 
           if (iteration >= maxIterations) {
             emailBtnText.textContent = targetText;
@@ -210,7 +213,7 @@
             emailHint.classList.add('visible');
             emailState = 'revealed';
           }
-        }, 50);
+        }, 35);
       }
 
       function copyEmail() {

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="dnaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6"/>
+      <stop offset="50%" style="stop-color:#2dd4bf"/>
+      <stop offset="100%" style="stop-color:#7f5af0"/>
+    </linearGradient>
+  </defs>
+  <!-- DNA Double Helix -->
+  <path d="M8 2 Q16 8 24 6 Q16 12 8 10 Q16 16 24 14 Q16 20 8 18 Q16 24 24 22 Q16 28 8 26 Q16 32 24 30"
+        fill="none"
+        stroke="url(#dnaGradient)"
+        stroke-width="2.5"
+        stroke-linecap="round"/>
+  <path d="M24 2 Q16 8 8 6 Q16 12 24 10 Q16 16 8 14 Q16 20 24 18 Q16 24 8 22 Q16 28 24 26 Q16 32 8 30"
+        fill="none"
+        stroke="url(#dnaGradient)"
+        stroke-width="2.5"
+        stroke-linecap="round"/>
+  <!-- Base pair dots -->
+  <circle cx="16" cy="7" r="1.5" fill="#2dd4bf"/>
+  <circle cx="16" cy="15" r="1.5" fill="#a78bfa"/>
+  <circle cx="16" cy="23" r="1.5" fill="#2dd4bf"/>
+</svg>
