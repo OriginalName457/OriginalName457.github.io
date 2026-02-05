@@ -333,6 +333,37 @@ body {
   background: rgba(45, 212, 191, 0.1);
 }
 
+/* Email Button Interactive */
+.email-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.email-hint {
+  font-size: 0.75rem;
+  color: var(--color-success);
+  margin-top: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: var(--font-mono);
+}
+
+.email-hint.visible {
+  opacity: 1;
+}
+
+#email-btn.revealed {
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+#email-btn.copied {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+  box-shadow: 0 4px 20px var(--color-accent-glow);
+}
+
 /* ============================================
    DNA Helix - Refined
    ============================================ */
